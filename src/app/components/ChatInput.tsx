@@ -15,6 +15,7 @@ import { nanoid } from "nanoid";
 import { Message } from "../lib/message";
 import { MessagesContext } from "../context/message";
 import { CornerDownLeft, Loader2 } from "lucide-react";
+import { toast } from "react-hot-toast";
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
@@ -71,10 +72,15 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
       }
 
       // clean up
-
       setTimeout(() => {
         textareaRef.current?.focus();
       }, 10);
+    },
+
+    onError: (_, message) => {
+      toast.error("Something went wrong. Please try again.");
+      removeMessage(message.id);
+      textareaRef.current?.focus();
     },
   });
   return (
@@ -101,6 +107,7 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
             setInput(e.target.value)
           }
           maxRows={4}
+          disabled={isLoading}
           autoFocus
           placeholder="Write a message..."
           className="peer disabled:opacity-50 pr-14 resize-none block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6"
