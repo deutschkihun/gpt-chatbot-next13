@@ -72,6 +72,10 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
       }
 
       // clean up
+      setIsMessageUpdating(false);
+      setInput("");
+
+      // clean up
       setTimeout(() => {
         textareaRef.current?.focus();
       }, 10);
@@ -92,8 +96,8 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              setIsMessageUpdating(false);
-              setInput("");
+              // setIsMessageUpdating(false);
+              // setInput("");
               const message: Message = {
                 id: nanoid(),
                 isUserMessage: true,
