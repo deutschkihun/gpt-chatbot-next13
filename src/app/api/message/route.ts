@@ -1,10 +1,10 @@
-import { chatbotPrompt } from "@/app/helpers/constants/chatbot-prompt";
-import { MessageArraySchema } from "@/app/lib/message";
+import { chatbotPrompt } from "@/helpers/constants/chatbot-prompt";
+import { MessageArraySchema } from "@/lib/message";
 import {
   ChatGPTMessage,
   OpenAIStream,
   OpenAIStreamPayload,
-} from "@/app/lib/openai-stream";
+} from "@/lib/openai-stream";
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
